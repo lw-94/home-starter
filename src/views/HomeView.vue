@@ -22,26 +22,28 @@ import ScrollReveal from 'scrollreveal'
 import anime from 'animejs'
 import Typed from 'typed.js'
 
-const t0 = ref(123123)
-const num = ref(0)
+const hue = ref(0)
+const typedTitle = ref()
 
 onMounted(() => {
-  anime({
-    targets: num,
-    value: 1000,
-    round: 1,
-    easing: 'linear'
+  typedTitle.value = new Typed('.t1', {
+    strings: ['The first native DeFi lending protocol on BaseChain'],
+    typeSpeed: 50,
+    cursorChar: ''
   })
   anime({
-    delay: 500,
-    targets: '#t0',
-    translateX: 250
+    targets: hue,
+    value: 360,
+    round: 1,
+    easing: 'linear',
+    duration: 5000,
+    loop: true
   })
   //
   ScrollReveal().reveal('.t1')
   ScrollReveal().reveal('.t2', {
     scale: 1.5,
-    delay: 500,
+    delay: 4000,
     beforeReveal(domEl) {
       console.log('beforeReveal')
     },
@@ -55,8 +57,7 @@ onMounted(() => {
     viewFactor: 0.5
   })
   ScrollReveal().reveal('.img6', {
-    distance: '150%',
-    origin: 'right',
+    scale: 0.7,
     viewFactor: 0.5,
     reset: true
   })
@@ -78,6 +79,9 @@ onMounted(() => {
       reset: true
     })
   })
+})
+onUnmounted(() => {
+  typedTitle.value.destroy()
 })
 const appStore = useAppStore()
 const { getProjectInfo } = appStore
@@ -163,12 +167,14 @@ onMounted(() => {
     <div class="pt52px lg:pt96px cover-bg h100vh flex flex-col items-center justify-center">
       <section class="w-full lg:max-w1280px flex flex-col lg:flex-row items-center justify-between">
         <div class="px-3 mr10 lg:mr30">
-          <!-- <p>{{ num }}</p>
-          <p id="t0">{{ t0 }}</p> -->
-          <p class="text-9 lg:text-18 font-700 capitalize t1">
-            The first native DeFi lending protocol on BaseChain
+          <p>{{ hue }}</p>
+          <p
+            class="text-9 lg:text-18 font-700 capitalize t1 bdl-[var(--vt-c-linear)]"
+            :style="`filter: hue-rotate(${hue}deg)`"
+          ></p>
+          <p class="mt5 inline-block text-4 lg:text-9 font-500 t2 hvr-pulse-grow">
+            Not just BaseChain
           </p>
-          <p class="mt5 text-4 lg:text-9 font-500 t2">Not just BaseChain</p>
         </div>
         <div v-if="!isEnd && !noPublicInfo" class="mt14">
           <CardComp />
@@ -182,7 +188,7 @@ onMounted(() => {
           <li
             v-for="(item, idx) in sec2List"
             :key="idx"
-            class="ins flex items-center p8 bg-[#212121] rounded-4 c-hvr-bounce-to-right"
+            class="ins flex items-center p8 bg-[#212121] rounded-4 hvr-bounce-to-right"
           >
             <img :src="item.icon" class="w70px lg:w140px" />
             <p class="ml6 lg:ml11 text-4 lg:text-6 font-700 leading-120%">{{ item.text }}</p>

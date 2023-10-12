@@ -10,6 +10,7 @@ declare module 'vue' {
     CBtn: typeof import('./src/components/CBtn.vue')['default']
     CCountDown: typeof import('./src/components/CCountDown.vue')['default']
     CParticle: typeof import('./src/components/CParticle.vue')['default']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

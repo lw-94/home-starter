@@ -58,7 +58,7 @@ const onClickLink = (link: string) => {
       <ul class="mt10 lg:mt0 flex flex-wrap justify-between lg:space-x-14">
         <li v-for="item in linkArr" :key="item.title" class="w165px lg:w[240px]">
           <dl>
-            <dt class="py4 font-500 border-b border-solid border-white">
+            <dt class="py4 font-500 bd-[white]-b">
               {{ item.title }}
             </dt>
             <template v-for="itemChild in item.children">

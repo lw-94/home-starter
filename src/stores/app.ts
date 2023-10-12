@@ -4,10 +4,6 @@ import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', () => {
   const projectInfo = ref()
-  const isWhiteListStage = computed(() => {
-    if (!projectInfo.value) return
-    return [-1, 0, -10].includes(projectInfo.value.status)
-  })
 
   const whitelistStartTime = computed(() => {
     if (!projectInfo.value) return

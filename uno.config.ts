@@ -4,26 +4,55 @@ import { defineConfig, presetUno, transformerDirectives, presetIcons } from 'uno
 export default defineConfig({
   // ...UnoCSS options
   rules: [
+    // background linear
+    [
+      /bgl-\[(.+)\]/,
+      ([, linearColor]) => ({
+        background: linearColor
+      })
+    ],
+    // text linear
+    [
+      /tl-\[(.+)\]/,
+      ([, linearColor]) => ({
+        background: linearColor,
+        '-webkit-background-clip': 'text',
+        color: 'transparent'
+      })
+    ],
     //border linear
     [
       /bdl-\[(.+)\]/,
-      (match) => ({
-        border: ` 1px solid transparent`,
-        'background-clip': `padding-box, border-box`,
-        'background-origin': `padding-box, border-box`,
-        'background-image': `linear-gradient(to right, ${match[1]}, ${match[1]}), var(--vt-c-linear)`
+      ([, linearColor]) => ({
+        border: '2px solid',
+        'border-image': `${linearColor} 30`,
+        'clip-path': 'inset(0 round 2px)'
       })
     ],
     // border
     [
-      /bd-\[(.+)\]/,
-      (match) => ({
-        border: `1px solid ${match[1]}`
-      })
+      /bd-\[(.+)\]-?([tblr])?/,
+      ([, color, direction]) => {
+        const val = `1px solid ${color}`
+        if (!direction) {
+          return {
+            border: val
+          }
+        }
+        const cssPropMap = {
+          t: 'border-top',
+          b: 'border-bottom',
+          l: 'border-left',
+          r: 'border-right'
+        }
+        return {
+          [cssPropMap[direction]]: val
+        }
+      }
     ]
   ],
   shortcuts: {
-    texte: 'overflow-hidden text-ellipsis whitespace-nowrap'
+    'text-e': 'overflow-hidden text-ellipsis whitespace-nowrap'
   },
   theme: {
     colors: {}

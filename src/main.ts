@@ -9,7 +9,7 @@ import 'virtual:uno.css'
 import 'element-plus/es/components/message/style/css'
 
 import env from '@/../env.yaml'
-import 'hover.css'
+// import 'hover.css'
 
 import Particles from 'vue3-particles'
 

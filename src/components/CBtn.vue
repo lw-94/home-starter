@@ -25,7 +25,7 @@ withDefaults(
     class="flex items-center justify-center box-border bg-transparent h-[28px] lg:h-[44px] px3 lg:px6 rounded-2 transition-opacity cursor-pointer"
     :class="{
       'text-white bg': !text,
-      'border border-solid border-[var(--vt-c-main)]': text,
+      'bd-[var(--vt-c-main)]': text,
       disable: disabled,
       'hover:op-[.8]': !disabled
     }"
